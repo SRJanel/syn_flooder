@@ -5,7 +5,7 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Tue Apr 11 14:37:28 2017 Janel
-** Last update Mon May 29 16:33:48 2017 Janel
+** Last update Wed May 31 20:05:40 2017 Janel
 */
 
 #ifndef LAYER4_H_
@@ -54,8 +54,17 @@ typedef struct		s_tcp_header
   /* LINE 5 */
   unsigned short	checksum;
   unsigned short	urgent_pointer;
-
 }			t_tcp_header;
+
+typedef struct		s_tcp_pseudoheader
+{
+  unsigned int		source_address;
+  unsigned int		destination_address;
+  unsigned char		reserved;
+  unsigned char		protocol;
+  unsigned short	tcp_segment_length;
+  t_tcp_header		*tcp_header;
+}			t_tcp_pseudoheader;
 
 #if 0
 void					print_tcp_header(const char buffer[const]);

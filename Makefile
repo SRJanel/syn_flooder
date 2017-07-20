@@ -5,12 +5,14 @@
 ## Login   <gianne_n@epitech.net>
 ##
 ## Started on  Tue Jul 12 12:19:34 2017 Nicolas Giannelos
-## Last update Mon May 29 16:29:40 2017 Janel
+## Last update Mon Jul 10 14:55:05 2017 Janel
 ##
 
 SRC	= src/main.c \
+	src/network.c \
 	src/network_miscellaneous.c \
 	src/packet.c \
+	src/send.c \
 
 OBJ	= $(SRC:.c=.o)
 
