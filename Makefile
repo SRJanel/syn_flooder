@@ -5,13 +5,12 @@
 ## Login   <gianne_n@epitech.net>
 ##
 ## Started on  Tue Jul 12 12:19:34 2017 Nicolas Giannelos
-## Last update Mon Jul 10 14:55:05 2017 Janel
+## Last update Tue Jul 25 15:45:28 2017 Janel
 ##
 
 SRC	= src/main.c \
-	src/network.c \
-	src/network_miscellaneous.c \
 	src/packet.c \
+	src/checksum.c \
 	src/send.c \
 
 OBJ	= $(SRC:.c=.o)
@@ -25,7 +24,7 @@ CC	= gcc -std=c99
 CFLAGS	= -Wall -Wextra -Werror
 CFLAGS	+= -ansi # -pedantic-errors
 CFLAGS	+= -I./include
-CFLAGS	+= -g3 -ggdb3
+CFLAGS	+= -ggdb3
 
 all: $(NAME)
 

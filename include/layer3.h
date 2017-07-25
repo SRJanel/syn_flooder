@@ -5,7 +5,7 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Tue Apr 11 14:37:28 2017 Janel
-** Last update Mon May 29 18:42:55 2017 Janel
+** Last update Mon Jul 24 16:14:47 2017 Janel
 */
 
 #ifndef LAYER3_H_
@@ -43,6 +43,7 @@ typedef struct		s_ip_header
 }			t_ip_header;
 
 #if 0
+
 # define RF_FLAG_MASK			0x8000
 # define DF_FLAG_MASK			0x4000
 # define MF_FLAG_MASK			0x2000
@@ -51,8 +52,8 @@ typedef struct		s_ip_header
 # define GET_IP_DF_FLAG(IPHDR)		((ntohs(IPHDR->ip_fragment_offset) & DF_FLAG_MASK) >> 0xE)
 # define GET_IP_MF_FLAG(IPHDR)		((ntohs(IPHDR->ip_fragment_offset) & MF_FLAG_MASK) >> 0xD)
 # define GET_IP_OFFSET_BITS(IPHDR)	(ntohs(iphdr->ip_fragment_offset) & F_OFFSET_MASK)
-
 void			print_ip_header(const char buffer[const]);
+
 #endif /* !0 */
 
 #endif /* !LAYER3_H_ */

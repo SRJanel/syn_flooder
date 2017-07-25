@@ -5,7 +5,7 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Tue Apr 11 14:37:28 2017 Janel
-** Last update Wed May 31 20:05:40 2017 Janel
+** Last update Mon Jul 24 16:20:09 2017 Janel
 */
 
 #ifndef LAYER4_H_
@@ -19,7 +19,7 @@ typedef struct		s_tcp_header
   /* LINE 2 */
   unsigned int		sequence_number;
   /* LINE 3 */
-  unsigned int		acknowledgement_number;
+  unsigned int		acknowledgment_number;
 
   /* LINE 4 */
 #if __BYTE_ORDER == __LITTLE_ENDIAN
@@ -63,7 +63,7 @@ typedef struct		s_tcp_pseudoheader
   unsigned char		reserved;
   unsigned char		protocol;
   unsigned short	tcp_segment_length;
-  t_tcp_header		*tcp_header;
+  t_tcp_header		tcp_header;
 }			t_tcp_pseudoheader;
 
 #if 0

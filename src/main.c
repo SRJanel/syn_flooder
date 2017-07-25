@@ -5,7 +5,7 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Mon May 29 12:19:55 2017 Janel
-** Last update Thu Jul 20 11:00:15 2017 Janel
+** Last update Tue Jul 25 16:20:52 2017 Janel
 */
 
 #include <stdio.h>
@@ -16,7 +16,6 @@
 #include <sys/socket.h>
 #include <netinet/ip.h>
 #include "syn_flooder.h"
-#include "network_miscellaneous.h"
 #include "layer3.h"
 #include "debug.h"
 
@@ -30,6 +29,25 @@ static void	usage(const char * const prog_name)
   fprintf(stderr, "[-] USAGE: %s <hostname> <port>\n", prog_name);
 }
 
+/*
+** Setting IP_HDRINCL on socket.
+** By setting IP_HDRINCL we specify that we will
+** include the IP header by ourselves in the packet.
+** On some OS's, IPPROTO_RAW will not set IP_HDRINCL
+** automatically.
+*/
+__inline__ static char	set_header_ip_inclusion(const int sd)
+{
+  return ((setsockopt(sd, IPPROTO_IP, IP_HDRINCL,
+		      &(int){1}, sizeof(int)))
+	  ? (PRINT_ERROR("setsockopt: "), FALSE) : (TRUE));
+}
+
+/*
+** In this function, we create a Layer 3 socket
+** We also set the destination address + we specify
+** that we will include the IP header by ourselves
+*/
 static int	create_socket(struct sockaddr_in *destination_address,
 			      const char *target_ip,
 			      const int port)
@@ -39,8 +57,9 @@ static int	create_socket(struct sockaddr_in *destination_address,
   if ((sd = socket(AF_INET, SOCK_RAW, IPPROTO_RAW)) == -1
       || !set_header_ip_inclusion(sd))
     return (PRINT_ERROR("Socket creation:"), -1);
-  fprintf(stdout, "sd: %d\n", sd);
-  set_destination_address(destination_address, inet_addr(target_ip), port);
+  destination_address->sin_family = AF_INET;
+  destination_address->sin_port = htons(port);
+  destination_address->sin_addr.s_addr = inet_addr(target_ip);	/* WARNING test AGAINST -1*/
   return (sd);
 }
 
@@ -56,16 +75,8 @@ int			main(int argc, char *argv[])
       || !build_packet(packet, argv[1], atoi(argv[2])))
     return (close(sd), EXIT_FAILURE);
 
-  return (send_packet(sd, packet, &destination_address, "42.42.42.42", argv[1]), close(sd));
+  return (send_packet(sd, packet, &destination_address), close(sd));
 }
 
-/* get_args */					/* DONE */
-/* create socket layer 3 RAW */			/* DONE */
-/* fill sockaddr_in */				/* DONE - need error handling */
-/* build ip header */				/* DONE */
-/* build tcp header */				/* IN PROGRESS */
-/* build tcp pseudo header */			/* IN PROGRESS */
-/* send arbitrary packet to hostname:port */	/* IN PROGRESS */
-/* recode checksum func */
-/* STEALTH */
-/* (add signal clean up) */
+/* getopt (pass -f file with source ip address) */
+/* (add signal clean up) */ /* - ?? clean up WHAT ? - nothing ..... */
