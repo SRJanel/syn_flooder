@@ -1,5 +1,0 @@
------------------------------------------------
-SET IP_HDRINCL as IPPROTO_RAW might not set IP_HDRINCL on all OS's
------------------------------------------------
-
-
