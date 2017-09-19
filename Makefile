@@ -1,11 +1,11 @@
 ##
 ## Makefile for Makefile in /home/janel/Projects/templates/network/SYN_flooder
 ##
-## Made by Nicolas Giannelos
-## Login   <gianne_n@epitech.net>
+## Made by Janel
+## Login   <XXX@epitech.eu>
 ##
-## Started on  Tue Jul 12 12:19:34 2017 Nicolas Giannelos
-## Last update Tue Jul 25 15:45:28 2017 Janel
+## Started on  Tue Jul 12 12:19:34 2017 Janel
+## Last update Tue Sep 19 15:20:53 2017 
 ##
 
 SRC	= src/main.c \
@@ -19,7 +19,7 @@ NAME	= syn_flooder
 
 RM	= rm -f
 
-CC	= gcc -std=c99
+CC	= gcc
 
 CFLAGS	= -Wall -Wextra -Werror
 CFLAGS	+= -ansi # -pedantic-errors

