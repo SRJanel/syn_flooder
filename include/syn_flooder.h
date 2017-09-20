@@ -5,7 +5,7 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Mon May 29 14:45:33 2017 Janel
-** Last update Tue Sep 19 15:18:32 2017 
+** Last update Wed Sep 20 19:39:57 2017 
 */
 
 #ifndef SYN_FLOODER_H_
@@ -15,6 +15,8 @@
 # include <netinet/in.h>
 # include <arpa/inet.h>
 # include <linux/tcp.h>
+
+# define SEND_TIME_DELAY		10
 
 typedef struct		s_tcp_pseudoheader
 {
@@ -31,7 +33,6 @@ typedef struct		s_tcp_pseudoheader
 # define RANDOM_NBR_RANGE(MIN, MAX)	(rand() % ((MAX > MIN) ?	\
 						   ((MAX - MIN) + MIN) : \
 						   ((MIN - MAX) + MAX)))
-# define SEND_TIME_DELAY		10
 
 /*
 ** src/packet.c

