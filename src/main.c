@@ -5,7 +5,7 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Mon May 29 12:19:55 2017 Janel
-** Last update Tue Sep 19 14:30:02 2017 
+** Last update Wed Sep 20 19:37:54 2017 
 */
 
 #include <stdio.h>
@@ -77,6 +77,3 @@ int			main(int argc, char *argv[])
 
   return (send_packet(sd, packet, &destination_address), close(sd));
 }
-
-/* getopt (pass -f file with source ip address) */
-/* (add signal clean up) */ /* - ?? clean up WHAT ? - nothing ..... */

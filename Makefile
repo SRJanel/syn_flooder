@@ -5,7 +5,7 @@
 ## Login   <XXX@epitech.eu>
 ##
 ## Started on  Tue Jul 12 12:19:34 2017 Janel
-## Last update Tue Sep 19 15:20:53 2017 
+## Last update Wed Sep 20 17:18:01 2017 
 ##
 
 SRC	= src/main.c \
@@ -24,7 +24,7 @@ CC	= gcc
 CFLAGS	= -Wall -Wextra -Werror
 CFLAGS	+= -ansi # -pedantic-errors
 CFLAGS	+= -I./include
-CFLAGS	+= -ggdb3
+#CFLAGS	+= -ggdb3
 
 all: $(NAME)
 
