@@ -5,7 +5,7 @@
 ## Login   <XXX@epitech.eu>
 ##
 ## Started on  Tue Jul 12 12:19:34 2017 Janel
-## Last update Wed Sep 20 17:18:01 2017 
+## Last update Mon Oct 23 00:26:55 2017 
 ##
 
 SRC	= src/main.c \
@@ -19,7 +19,7 @@ NAME	= syn_flooder
 
 RM	= rm -f
 
-CC	= gcc
+CC	= gcc -D_DEFAULT_SOURCE
 
 CFLAGS	= -Wall -Wextra -Werror
 CFLAGS	+= -ansi # -pedantic-errors

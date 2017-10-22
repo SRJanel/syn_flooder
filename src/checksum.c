@@ -5,12 +5,12 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Tue Jul 25 15:41:45 2017 Janel
-** Last update Tue Sep 19 14:51:04 2017 
+** Last update Mon Oct 23 00:09:15 2017 
 */
 
 #include <string.h>
-#include <linux/ip.h>
-#include <linux/tcp.h>
+#include <netinet/ip.h>
+#include <netinet/tcp.h>
 #include "syn_flooder.h"
 
 unsigned short		csum(unsigned short *ptr, int nbytes)

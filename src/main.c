@@ -5,13 +5,14 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Mon May 29 12:19:55 2017 Janel
-** Last update Wed Sep 20 19:37:54 2017 
+** Last update Mon Oct 23 00:18:43 2017 
 */
 
 #include <stdio.h>
 #include <time.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <arpa/inet.h>
 #include <netinet/ip.h>
 #include <netinet/tcp.h>
 #include <sys/socket.h>

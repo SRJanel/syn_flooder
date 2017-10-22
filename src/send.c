@@ -5,13 +5,13 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Wed Jun  7 15:02:24 2017 Janel
-** Last update Tue Sep 19 15:21:49 2017 
+** Last update Mon Oct 23 00:27:25 2017 
 */
 
-#define _DEFAULT_SOURCE
 #include <unistd.h>
 #include <stdlib.h>
-#include <linux/ip.h>
+#include <arpa/inet.h>
+#include <netinet/ip.h>
 #include "syn_flooder.h"
 #include "stealth.h"
 #include "debug.h"

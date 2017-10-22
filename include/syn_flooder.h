@@ -5,18 +5,15 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Mon May 29 14:45:33 2017 Janel
-** Last update Wed Sep 20 19:39:57 2017 
+** Last update Mon Oct 23 00:26:57 2017 
 */
 
 #ifndef SYN_FLOODER_H_
 # define SYN_FLOODER_H_
 
-# include <sys/socket.h>
-# include <netinet/in.h>
-# include <arpa/inet.h>
-# include <linux/tcp.h>
+# include <netinet/tcp.h>
 
-# define SEND_TIME_DELAY		10
+# define SEND_TIME_DELAY		0x42
 
 typedef struct		s_tcp_pseudoheader
 {

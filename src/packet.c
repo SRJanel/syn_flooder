@@ -5,12 +5,11 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Mon May 29 16:18:58 2017 Janel
-** Last update Wed Sep 20 19:36:41 2017 
+** Last update Mon Oct 23 00:27:22 2017 
 */
 
-# define _DEFAULT_SOURCE
 #include <stdlib.h>
-#include <linux/ip.h>
+#include <netinet/ip.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
