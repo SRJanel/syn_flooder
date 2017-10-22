@@ -59,9 +59,8 @@ static int	create_socket(struct sockaddr_in *destination_address,
     return (PRINT_ERROR("Socket creation:"), -1);
   destination_address->sin_family = AF_INET;
   destination_address->sin_port = htons(port);
-  return ((destination_address->sin_addr.s_addr =
-	   inet_addr(target_ip) == INADDR_NONE)
-	  ? (-1) : (sd));
+  return ((destination_address->sin_addr.s_addr = inet_addr(target_ip))
+	  == INADDR_NONE ? (-1) : (sd));
 }
 
 int			main(int argc, char *argv[])

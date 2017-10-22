@@ -17,21 +17,6 @@
 #include "syn_flooder.h"
 #include "debug.h"
 
-static __be32	char_to___be32(const char *ip_address)
-{
-    __be32	nbr;
-    char	*ptr;
-
-    nbr = 0;
-    ip_address = strtok((char *)ip_address, ".");
-    while (ip_address != NULL)
-      {
-        nbr = (nbr << 8) + strtoul(ip_address, &ptr, 0);
-        ip_address = strtok(NULL, ".");
-      }
-    return (htonl(nbr));
-}
-
 /*
 ** Only setting fields which are NOT 0.
 ** This area has already been memset (in main)
@@ -40,6 +25,7 @@ static char		build_ip_header(unsigned char *packet,
 					const char *target_ip_address)
 {
   struct iphdr		*ip_header;
+  struct in_addr	temp;
 
   INSIDE;
   ip_header = (struct iphdr *)packet;
@@ -49,10 +35,9 @@ static char		build_ip_header(unsigned char *packet,
   ip_header->protocol = IPPROTO_TCP;
   ip_header->id = htons(RANDOM_NBR_RANGE(0, 0xFFFF));
   ip_header->tot_len = sizeof(struct iphdr) + sizeof(struct tcphdr);
-  ip_header->daddr = char_to___be32(target_ip_address);
-  /* below sets field to 0 :| */
-  /* if (inet_aton(target_ip_address, (struct in_addr[1]){{ip_header->daddr}}) != 1) */
-  /* return (PRINT_ERROR("inet_pton:"), FALSE); */
+  if (inet_aton(target_ip_address, &temp) != 1)
+    return (PRINT_ERROR("inet_aton:"), FALSE);
+  ip_header->daddr = temp.s_addr;
   return (TRUE);
 }
 

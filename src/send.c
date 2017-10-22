@@ -5,7 +5,7 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Wed Jun  7 15:02:24 2017 Janel
-** Last update Mon Oct 23 00:27:25 2017 
+** Last update Mon Oct 23 00:35:07 2017 
 */
 
 #include <unistd.h>
@@ -26,10 +26,8 @@ static void	stealth(unsigned char * const packet)
   tcp_header = (struct tcphdr *)(packet + sizeof(struct iphdr));    
   random = rand() % MAX_NBR_STATE;
   ip_header->saddr = RANDOM_NBR_RANGE(0, 0xFFFFFFFF);
-  ip_header->ttl = RANDOM_NBR_RANGE(64, 255);
   tcp_header->source = RANDOM_NBR_RANGE(1024, 65535);
   tcp_header->seq = RANDOM_NBR_RANGE(0, 0xFFFF);
-  tcp_header->window = htons(RANDOM_NBR_RANGE(1000, 65535));  
   ip_header->ttl = g_os_simulation[(short)random].ttl;
   tcp_header->window = g_os_simulation[(short)random].window_size;
   fprintf(stdout, "[LOG] ip_header->source_address: %s\n", inet_ntoa((struct in_addr){ip_header->saddr}));
