@@ -5,7 +5,7 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Tue Jul 25 15:41:45 2017 Janel
-** Last update Mon Oct 23 00:09:15 2017 
+** Last update Mon Oct 23 01:04:58 2017 
 */
 
 #include <string.h>
@@ -13,6 +13,9 @@
 #include <netinet/tcp.h>
 #include "syn_flooder.h"
 
+/*
+** csum() taken from the internet
+*/
 unsigned short		csum(unsigned short *ptr, int nbytes)
 {
   register long		sum;

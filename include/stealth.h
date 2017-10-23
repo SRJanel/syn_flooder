@@ -5,7 +5,7 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Tue Jul 25 13:17:18 2017 Janel
-** Last update Tue Jul 25 15:08:57 2017 Janel
+** Last update Mon Oct 23 01:02:56 2017 
 */
 
 #ifndef STEALTH_H_
@@ -28,7 +28,7 @@ typedef struct		s_os_simulation
   ENTRY(DEFAULT,				64, 65535,	"Default OS")
 
 enum {
-# define ENTRY(a, b, c, d) a,
+# define ENTRY(ENUM, UNUSED2, UNUSED3, UNUSED4) ENUM,
   OS_TABLE
 # undef ENTRY
   MAX_NBR_STATE
@@ -36,7 +36,7 @@ enum {
 
 t_os_simulation		g_os_simulation[MAX_NBR_STATE] =
   {
-# define ENTRY(a, b, c, d) {b, c, d},
+# define ENTRY(UNUSED1, TTL, WINDOW_SIZE, TAG) {TTL, WINDOW_SIZE, TAG},
     OS_TABLE
 # undef ENTRY
   };
