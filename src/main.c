@@ -5,7 +5,7 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Mon May 29 12:19:55 2017 Janel
-** Last update Mon Oct 23 00:18:43 2017 
+** Last update Fri Dec  8 13:38:22 2017 
 */
 
 #include <stdio.h>
@@ -44,7 +44,7 @@ static __inline__ char	set_header_ip_inclusion(const int sd)
 }
 
 /*
-** In this function, we create a Layer 3 socket
+** In this function, we create a (L3) socket
 ** We also set the destination address + we specify
 ** that we will include the IP header by ourselves
 */
@@ -56,11 +56,10 @@ static int	create_socket(struct sockaddr_in *destination_address,
 
   if ((sd = socket(AF_INET, SOCK_RAW, IPPROTO_RAW)) == -1
       || !set_header_ip_inclusion(sd))
-    return (PRINT_ERROR("Socket creation:"), -1);
+    return (PRINT_ERROR("Socket creation:"), INADDR_NONE);
   destination_address->sin_family = AF_INET;
   destination_address->sin_port = htons(port);
-  return ((destination_address->sin_addr.s_addr = inet_addr(target_ip))
-	  == INADDR_NONE ? (-1) : (sd));
+  return ((destination_address->sin_addr.s_addr = inet_addr(target_ip)));
 }
 
 int			main(int argc, char *argv[])
@@ -71,7 +70,7 @@ int			main(int argc, char *argv[])
 
   if (argc != 3)
     return (usage(argv[0]), EXIT_FAILURE);
-  if ((sd = create_socket(&destination_address, argv[1], atoi(argv[2]))) == -1
+  if ((sd = create_socket(&destination_address, argv[1], atoi(argv[2]))) == INADDR_NONE
       || !build_packet(packet, argv[1], atoi(argv[2])))
     return (close(sd), EXIT_FAILURE);
 
