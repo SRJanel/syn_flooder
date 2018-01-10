@@ -56,10 +56,11 @@ static int	create_socket(struct sockaddr_in *destination_address,
 
   if ((sd = socket(AF_INET, SOCK_RAW, IPPROTO_RAW)) == -1
       || !set_header_ip_inclusion(sd))
-    return (PRINT_ERROR("Socket creation:"), INADDR_NONE);
+    return (PRINT_ERROR("Socket creation:"), -1);
   destination_address->sin_family = AF_INET;
   destination_address->sin_port = htons(port);
-  return ((destination_address->sin_addr.s_addr = inet_addr(target_ip)));
+  return ((destination_address->sin_addr.s_addr = inet_addr(target_ip)) 
+	  == INADDR_NONE ? (-1) : (sd));
 }
 
 int			main(int argc, char *argv[])
@@ -70,9 +71,8 @@ int			main(int argc, char *argv[])
 
   if (argc != 3)
     return (usage(argv[0]), EXIT_FAILURE);
-  if ((sd = create_socket(&destination_address, argv[1], atoi(argv[2]))) == INADDR_NONE
+  if ((sd = create_socket(&destination_address, argv[1], atoi(argv[2]))) == -1
       || !build_packet(packet, argv[1], atoi(argv[2])))
-    return (close(sd), EXIT_FAILURE);
-
+    return (fprintf(stderr, "[-] Fatal Error\n"), close(sd), EXIT_FAILURE);
   return (send_packet(sd, packet, &destination_address), close(sd));
 }
