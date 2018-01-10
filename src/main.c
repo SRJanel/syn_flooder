@@ -5,7 +5,7 @@
 ** Login   <janel@epitech.net>
 **
 ** Started on  Mon May 29 12:19:55 2017 Janel
-** Last update Fri Dec  8 13:38:22 2017 
+** Last update Wed Jan 10 18:50:29 2018 
 */
 
 #include <stdio.h>
@@ -31,8 +31,6 @@ static __inline__ void	usage(const char * const prog_name)
 
 /*
 ** Setting IP_HDRINCL on socket.
-** By setting IP_HDRINCL we specify that we will
-** include the IP header by ourselves in the packet.
 ** On some OS's, IPPROTO_RAW will not set IP_HDRINCL
 ** automatically.
 */
@@ -43,11 +41,6 @@ static __inline__ char	set_header_ip_inclusion(const int sd)
 	  ? (PRINT_ERROR("setsockopt: "), FALSE) : (TRUE));
 }
 
-/*
-** In this function, we create a (L3) socket
-** We also set the destination address + we specify
-** that we will include the IP header by ourselves
-*/
 static int	create_socket(struct sockaddr_in *destination_address,
 			      const char *target_ip,
 			      const int port)
